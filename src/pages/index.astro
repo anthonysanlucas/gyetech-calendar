@@ -1,0 +1,85 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro'
+---
+
+<MainLayout
+  titlePage="Calendario de Eventos de la Comunidad | GYE TECH"
+  descriptionPage="No te pierdas ningún evento de la comunidad tecnológica más grande del Ecuador, Guayaquil Tech.">
+  <h1 class="text-center font-bold text-2xl py-10 tracking-wider [text-wrap:balance] sm:text-4xl">
+    CALENDARIO DE EVENTOS
+    <span class="text-primary">2023</span>
+  </h1>
+  <section class="w-full overflow-auto">
+    <table class="mx-auto min-w-max mb-4 border-b border-slate-100">
+      <thead class="bg-slate-100 text-slate-600">
+        <tr>
+          <th
+            class="px-8 py-6 w-max text-left text-sm leading-4 font-medium tracking-widest rounded-tl-md sm:text-base">
+            FECHA
+          </th>
+          <th
+            class="px-8 py-6 w-max text-left text-sm leading-4 font-medium tracking-widest sm:text-base">
+            EVENTO
+          </th>
+          <th
+            class="px-8 py-6 w-max text-left text-sm leading-4 font-medium tracking-widest sm:text-base">
+            ORGANIZADOR
+          </th>
+          <th
+            class="px-8 py-6 w-max text-left text-sm leading-4 font-medium tracking-widest rounded-tr-md sm:text-base">
+            INFORMACIÓN
+          </th>
+        </tr>
+      </thead>
+      <tbody id="events">
+        <!-- row container -->
+      </tbody>
+    </table>
+  </section>
+</MainLayout>
+
+<script>
+  // Spreadsheet ID and the name of the spreadsheet
+  // Demo ID: 1ZEMXCnbwTo0vrvKmQaIuaGC9QVGGRrRwKwGmM10Tx60
+  // Demo Sheet Name: 2023
+  const SHEET_ID = ''
+  const SHEET_NAME = ''
+  // The URL of the spreadsheet to source data from. Make sure it is public or set to Anyone with link can view.
+  const base = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?`
+
+  // select column names
+  const SQL_QUERY = `SELECT A, B, C, D`
+  const query = encodeURIComponent(SQL_QUERY)
+  const eventsContainer = document.getElementById('events')
+
+  fetch(`${base}&sheet=${SHEET_NAME}&tq=${query}`)
+    .then(res => res.text())
+    .then(rep => {
+      const jsonString = rep.substring(rep.indexOf('{'), rep.lastIndexOf('}') + 1)
+      const jsData = JSON.parse(jsonString)
+
+      const spreadsheetRows = jsData.table.rows
+
+      eventsContainer.innerHTML = spreadsheetRows
+        .map(row => {
+          return `
+          <tr class="transition-colors duration-100 hover:bg-primary/40">
+            <td class="px-8 py-6 whitespace-no-wrap">
+              <p class="text-lg leading-5 font-regular text-slate-100">${row.c[0].f}</p>
+            </td>
+            <td class="px-8 py-6 whitespace-no-wrap">
+              <p class="text-lg leading-5 font-regular text-slate-100">${row.c[1].v}</p>
+            </td>
+            <td class="px-8 py-6 whitespace-no-wrap">
+              <p class="text-lg leading-5 font-regular text-slate-100">${row.c[2].v}</p>
+            </td>
+            <td class="px-2 py-4 whitespace-no-wrap">
+              <a class="px-6 py-2 text-slate-300 font-medium underline underline-offset-2 transition-colors duration-100 hover:text-primary" href=https://${row.c[3].v} target="_blank" rel="noopener noreferrer">${row.c[3].v}</a>
+            </td>  
+          </tr>
+        `
+        })
+        .join('')
+    })
+    .catch(error => console.log(error))
+</script>
