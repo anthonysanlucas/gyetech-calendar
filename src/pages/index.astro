@@ -1,5 +1,6 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro'
+import ShareButton from '@/components/ShareButton.astro'
 ---
 
 <MainLayout
@@ -36,21 +37,38 @@ import MainLayout from '@/layouts/MainLayout.astro'
       </tbody>
     </table>
   </section>
+  <svg
+    id="loading-spinner"
+    class="animate-spin mt-8 mx-auto h-14 w-14 text-primary"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24">
+    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
+    ></circle>
+    <path
+      class="opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+    ></path>
+  </svg>
+  <ShareButton />
 </MainLayout>
 
 <script>
   // Spreadsheet ID and the name of the spreadsheet
   // Demo ID: 1ZEMXCnbwTo0vrvKmQaIuaGC9QVGGRrRwKwGmM10Tx60
   // Demo Sheet Name: 2023
-  const SHEET_ID = ''
-  const SHEET_NAME = ''
+  const SHEET_ID = '1ZEMXCnbwTo0vrvKmQaIuaGC9QVGGRrRwKwGmM10Tx60'
+  const SHEET_NAME = '2023'
   // The URL of the spreadsheet to source data from. Make sure it is public or set to Anyone with link can view.
   const base = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?`
 
   // select column names
   const SQL_QUERY = `SELECT A, B, C, D`
   const query = encodeURIComponent(SQL_QUERY)
+
   const eventsContainer = document.getElementById('events')
+  const loadingSpinner = document.getElementById('loading-spinner')
 
   fetch(`${base}&sheet=${SHEET_NAME}&tq=${query}`)
     .then(res => res.text())
@@ -59,6 +77,8 @@ import MainLayout from '@/layouts/MainLayout.astro'
       const jsData = JSON.parse(jsonString)
 
       const spreadsheetRows = jsData.table.rows
+
+      loadingSpinner.remove()
 
       eventsContainer.innerHTML = spreadsheetRows
         .map(row => {
