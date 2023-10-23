@@ -8,6 +8,15 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Roboto', 'sans-serif']
+      },
+      animation: {
+        'slide-circle': 'slide-circle 2.5s ease-in-out infinite alternate'
+      },
+      keyframes: {
+        'slide-circle': {
+          '0%': { transform: 'translateY(-16px)' },
+          '100%': { transform: 'translateY(16px)' }
+        }
       }
     }
   },
