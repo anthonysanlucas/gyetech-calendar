@@ -15,7 +15,7 @@ module.exports = {
       keyframes: {
         'slide-circle': {
           '0%': { transform: 'translateY(-16px)' },
-          '100%': { transform: 'translateY(16px)' }
+          '100%': { transform: 'translateY(15px)' }
         }
       }
     }
