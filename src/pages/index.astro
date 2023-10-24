@@ -87,16 +87,24 @@ import SlideAnimationIcon from '@/components/SlideAnimationIcon.astro'
           return `
           <tr class="transition-colors duration-100 hover:bg-primary/40">
             <td class="px-8 py-6">
-              <p class="text-base leading-5 font-regular text-slate-100 md:text-lg">${row.c[0].f}</p>
+              <p class="text-base leading-5 font-regular text-slate-100 md:text-lg">${
+                row.c[0].f
+              }</p>
             </td>
             <td class="px-8 py-6">
-              <p class="text-base leading-5 font-regular text-slate-100 md:text-lg">${row.c[1].v}</p>
+              <p class="text-base leading-5 font-regular text-slate-100 md:text-lg">${
+                row.c[1].v
+              }</p>
             </td>
             <td class="px-8 py-6">
-              <p class="text-base leading-5 font-regular text-slate-100 md:text-lg">${row.c[2].v}</p>
+              <p class="text-base leading-5 font-regular text-slate-100 md:text-lg">${
+                row.c[2].v
+              }</p>
             </td>
             <td class="px-2 py-4">
-              <a class="px-6 py-2 text-slate-300 font-medium underline underline-offset-2 transition-colors duration-100 hover:text-primary" href=https://${row.c[3].v} target="_blank" rel="noopener noreferrer">${row.c[3].v}</a>
+              <a class="px-6 py-2 text-primary/70 font-medium underline underline-offset-2 transition-colors duration-100 hover:text-primary" href=${
+                row.c[3].v.includes('https://') ? row.c[3].v : `https://${row.c[3].v}`
+              } target="_blank" rel="noopener noreferrer">Regístrate aquí</a>
             </td>  
           </tr>
         `
