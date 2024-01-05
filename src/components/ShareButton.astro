@@ -1,27 +1,34 @@
-<button
-  id="share-button"
-  class="flex justify-center items-center gap-x-2 mt-10 mx-auto bg-primary text-slate-700 font-medium py-2 px-4 rounded-md transition-colors duration-100 shadow-sm shadow-primary/40 hover:bg-primary/90">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <path
-      d="M5.5 15a3.51 3.51 0 0 0 2.36-.93l6.26 3.58a3.06 3.06 0 0 0-.12.85 3.53 3.53 0 1 0 1.14-2.57l-6.26-3.58a2.74 2.74 0 0 0 .12-.76l6.15-3.52A3.49 3.49 0 1 0 14 5.5a3.35 3.35 0 0 0 .12.85L8.43 9.6A3.5 3.5 0 1 0 5.5 15zm12 2a1.5 1.5 0 1 1-1.5 1.5 1.5 1.5 0 0 1 1.5-1.5zm0-13A1.5 1.5 0 1 1 16 5.5 1.5 1.5 0 0 1 17.5 4zm-12 6A1.5 1.5 0 1 1 4 11.5 1.5 1.5 0 0 1 5.5 10z"
-      fill="currentColor">
-    </path>
-  </svg>
+<button id="shareOnLinkedIn" class="flex justify-center items-center gap-x-2 bg-primary text-slate-700 font-medium py-2 px-4 rounded-md transition-colors duration-100 shadow-sm shadow-primary/40 hover:bg-primary/90">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+  <span class="text-center text-sm">Compartir</span>
+</button>
+
+<button id="shareOnFacebook" class="flex justify-center items-center gap-x-2 bg-primary text-slate-700 font-medium py-2 px-4 rounded-md transition-colors duration-100 shadow-sm shadow-primary/40 hover:bg-primary/90">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" width="24" height="24" viewBox="0 0 50 50" style="null" class="icon icons8-Facebook-Filled" >    <path d="M40,0H10C4.486,0,0,4.486,0,10v30c0,5.514,4.486,10,10,10h30c5.514,0,10-4.486,10-10V10C50,4.486,45.514,0,40,0z M39,17h-3 c-2.145,0-3,0.504-3,2v3h6l-1,6h-5v20h-7V28h-3v-6h3v-3c0-4.677,1.581-8,7-8c2.902,0,6,1,6,1V17z"></path></svg>
+  <span class="text-center text-sm">Compartir</span>
+</button>
+
+<button id="shareOnTwitter" class="flex justify-center items-center gap-x-2 bg-primary text-slate-700 font-medium py-2 px-4 rounded-md transition-colors duration-100 shadow-sm shadow-primary/40 hover:bg-primary/90">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
   <span class="text-center text-sm">Compartir</span>
 </button>
 
 <script>
-  const shareButton = document.getElementById('share-button')
+  shareOnLinkedIn.addEventListener('click', () => {
+    const linkedInUrl = `https://www.linkedin.com/shareArticle?url=https://eventos.guayaquiltech.ec/&title=Calendario%20de%20Eventos%20de%20las%20Comunidades%20|%20GYE%20TECH&summary=No%20te%20pierdas%20ningún%20evento%20de%20la%20comunidad%20tecnológica%20más%20grande%20del%20Ecuador,%20Guayaquil%20Tech.`;
+    window.open(linkedInUrl, '_blank', 'width=600,height=400');
+  });
 
-  shareButton.addEventListener('click', async () => {
-    try {
-      await navigator.share({
-        title: 'Calendario de Eventos de la Comunidad | GYE TECH',
-        text: '📆 Listado de eventos de la comunidad ',
-        url: 'https://eventos.guayaquiltech.ec/'
-      })
-    } catch (err) {
-      console.error(err)
-    }
-  })
+  shareOnFacebook.addEventListener('click', () => {
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=https://eventos.guayaquiltech.ec/`;
+    window.open(facebookUrl, '_blank', 'width=600,height=400');
+  });
+
+  shareOnTwitter.addEventListener('click', () => {
+    const twitterUrl = `https://twitter.com/intent/tweet?url=https://eventos.guayaquiltech.ec/&text=No%20te%20pierdas%20ningún%20evento%20de%20la%20comunidad%20tecnológica%20más%20grande%20del%20Ecuador,%20Guayaquil%20Tech.`;
+    window.open(twitterUrl, '_blank', 'width=600,height=400');
+  });
+
 </script>
+
+
